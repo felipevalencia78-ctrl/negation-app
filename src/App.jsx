@@ -379,29 +379,29 @@ function AnswersModal({ open, onClose, answers }) {
       title="Voir les réponses"
       subtitle="Consulte les réponses données et les bonnes réponses pour chaque question."
     >
-      <div className="space-y-3">
+      <div className="mx-auto max-w-4xl space-y-2.5">
         {QUESTIONS.map((question, index) => {
           const userAnswer = answers[question.id] ?? '—';
           const isCorrect = answers[question.id] === question.answer;
 
           return (
-            <div key={question.id} className="rounded-2xl border border-slate-200 bg-slate-50 p-4 shadow-sm">
-              <p className="text-xs font-black uppercase tracking-[0.16em] text-cyan-700">Question {index + 1}</p>
-              <p className="mt-1 text-base font-black text-slate-800">{question.prompt}</p>
-              <div className="mt-3 grid gap-2 md:grid-cols-2">
+            <div key={question.id} className="rounded-2xl border border-slate-200 bg-slate-50 p-3 shadow-sm">
+              <p className="text-center text-[11px] font-black uppercase tracking-[0.16em] text-cyan-700">Question {index + 1}</p>
+              <p className="mt-1 text-center text-sm md:text-[15px] font-black leading-snug text-slate-800">{question.prompt}</p>
+              <div className="mx-auto mt-3 grid max-w-3xl gap-2 md:grid-cols-2">
                 <div
-                  className={`rounded-xl border p-3 ${
+                  className={`rounded-xl border p-2.5 text-center ${
                     isCorrect ? 'border-emerald-200 bg-emerald-50' : 'border-rose-200 bg-rose-50'
                   }`}
                 >
-                  <p className="text-xs font-black uppercase tracking-wide text-slate-500">Ta réponse</p>
-                  <p className={`mt-1 font-semibold ${isCorrect ? 'text-emerald-800' : 'text-rose-800'}`}>
+                  <p className="text-[10px] font-black uppercase tracking-wide text-slate-500">Ta réponse</p>
+                  <p className={`mt-1 text-sm font-semibold ${isCorrect ? 'text-emerald-800' : 'text-rose-800'}`}>
                     {userAnswer}
                   </p>
                 </div>
-                <div className="rounded-xl border border-cyan-200 bg-cyan-50 p-3">
-                  <p className="text-xs font-black uppercase tracking-wide text-slate-500">Bonne réponse</p>
-                  <p className="mt-1 font-semibold text-cyan-900">{question.answer}</p>
+                <div className="rounded-xl border border-cyan-200 bg-cyan-50 p-2.5 text-center">
+                  <p className="text-[10px] font-black uppercase tracking-wide text-slate-500">Bonne réponse</p>
+                  <p className="mt-1 text-sm font-semibold text-cyan-900">{question.answer}</p>
                 </div>
               </div>
             </div>
@@ -520,7 +520,7 @@ function QuestionCard(props) {
         </button>
       </div>
 
-      <h3 className="mt-3 text-lg font-black leading-snug text-white md:text-xl">{question.prompt}</h3>
+      <h3 className="mt-3 text-center text-lg font-black leading-snug text-white md:text-xl">{question.prompt}</h3>
 
       <div className="mt-4 grid gap-2.5">
         {question.options.map((option) => {
@@ -546,12 +546,12 @@ function QuestionCard(props) {
               type="button"
               onClick={() => onSelect(option)}
               disabled={Boolean(feedback)}
-              className={`transform rounded-2xl border px-3.5 py-3 text-left text-sm font-semibold transition-all duration-200 md:text-base ${optionClassName}`}
+              className={`mx-auto w-full max-w-3xl transform rounded-2xl border px-3 py-2.5 text-sm font-semibold transition-all duration-200 md:text-base ${optionClassName}`}
             >
-              <div className="flex items-center justify-between gap-3">
-                <span>{highlightNegation(option)}</span>
-                {showCorrect ? <CheckCircle2 className="h-4 w-4 shrink-0 md:h-5 md:w-5" /> : null}
-                {showWrong ? <XCircle className="h-4 w-4 shrink-0 md:h-5 md:w-5" /> : null}
+              <div className="relative flex items-center justify-center gap-3">
+                <span className="block text-center">{highlightNegation(option)}</span>
+                {showCorrect ? <CheckCircle2 className="absolute right-0 h-4 w-4 shrink-0 md:h-5 md:w-5" /> : null}
+                {showWrong ? <XCircle className="absolute right-0 h-4 w-4 shrink-0 md:h-5 md:w-5" /> : null}
               </div>
             </button>
           );
