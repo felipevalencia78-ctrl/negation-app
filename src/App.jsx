@@ -771,7 +771,7 @@ export default function NegationApp() {
           )}
         </div>
         <div className="mt-2 text-center text-[10px] font-medium tracking-wide text-white/75 md:text-xs">
-          © Felipe LV - Produit Grammaire FLE
+          © Felipe VL - Produit Grammaire FLE
         </div>
       </div>
     </div>
