@@ -198,14 +198,12 @@ function highlightNegation(text) {
         </strong>
       );
     }
-
     return <React.Fragment key={index}>{part}</React.Fragment>;
   });
 }
 
 function buildFeedback(question, answer) {
   const correct = answer === question.answer;
-
   return {
     correct,
     message: correct
@@ -218,9 +216,9 @@ function Header({ started, score, currentIndex, total }) {
   const progress = started ? (currentIndex / total) * 100 : 0;
 
   return (
-    <div className="rounded-[28px] border border-white/15 bg-gradient-to-r from-slate-950 via-blue-950 to-sky-900 px-4 py-3.5 shadow-xl backdrop-blur md:px-5 md:py-4">
-      <div className="flex items-start justify-between gap-4">
-        <div className="flex min-w-0 items-center gap-3">
+    <div className="rounded-[26px] border border-white/15 bg-gradient-to-r from-slate-950 via-blue-950 to-sky-900 px-4 py-3 shadow-xl backdrop-blur md:px-5 md:py-3.5">
+      <div className="flex items-start justify-between gap-3">
+        <div className="flex min-w-0 items-center gap-2.5">
           <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-sky-500 via-cyan-500 to-blue-700 text-white shadow-lg ring-1 ring-white/30 md:h-12 md:w-12">
             <BookOpenText className="h-5 w-5 md:h-6 md:w-6" />
           </div>
@@ -235,7 +233,7 @@ function Header({ started, score, currentIndex, total }) {
           </div>
         </div>
 
-        <div className="flex shrink-0 items-start gap-2">
+        <div className="flex shrink-0 items-start gap-1.5">
           <div className="min-w-[62px] rounded-xl border border-white/10 bg-white/10 px-2.5 py-1.5 text-center shadow-sm backdrop-blur-sm">
             <p className="text-[9px] font-bold uppercase tracking-[0.14em] text-white/60">Score</p>
             <p className="mt-1 text-sm font-black leading-none text-white md:text-base">{score}</p>
@@ -276,10 +274,7 @@ function ModalShell({ open, onClose, title, subtitle, children }) {
     };
 
     window.addEventListener('keydown', handleKeyDown);
-
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
+    return () => window.removeEventListener('keydown', handleKeyDown);
   }, [open, onClose]);
 
   if (!open) {
@@ -295,30 +290,30 @@ function ModalShell({ open, onClose, title, subtitle, children }) {
         onClick={onClose}
       />
 
-      <div className="relative z-10 w-full max-w-5xl overflow-hidden rounded-[28px] border border-white/70 bg-white/96 shadow-2xl">
-        <div className="bg-gradient-to-r from-sky-600 via-cyan-600 to-blue-700 px-4 py-4 text-white md:px-5">
+      <div className="relative z-10 w-full max-w-4xl overflow-hidden rounded-[26px] border border-white/70 bg-white/96 shadow-2xl">
+        <div className="bg-gradient-to-r from-sky-600 via-cyan-600 to-blue-700 px-4 py-3 text-white md:px-5">
           <div className="flex items-start justify-between gap-4">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-white/15 ring-1 ring-white/20">
-                <BookOpenText className="h-5 w-5" />
+              <div className="flex h-9 w-9 items-center justify-center rounded-2xl bg-white/15 ring-1 ring-white/20">
+                <BookOpenText className="h-4.5 w-4.5" />
               </div>
               <div>
-                <p className="text-lg font-black md:text-xl">{title}</p>
-                <p className="mt-0.5 text-xs text-white/85 md:text-sm">{subtitle}</p>
+                <p className="text-base font-black md:text-lg">{title}</p>
+                <p className="mt-0.5 text-xs text-white/85">{subtitle}</p>
               </div>
             </div>
 
             <button
               type="button"
               onClick={onClose}
-              className="rounded-xl bg-white/15 px-3 py-2 text-xs font-black text-white transition hover:bg-white/20 md:text-sm"
+              className="rounded-xl bg-white/15 px-3 py-1.5 text-xs font-black text-white transition hover:bg-white/20"
             >
               Fermer
             </button>
           </div>
         </div>
 
-        <div className="max-h-[70vh] overflow-y-auto p-4 md:p-5">{children}</div>
+        <div className="max-h-[68vh] overflow-y-auto p-4">{children}</div>
       </div>
     </div>
   );
@@ -332,32 +327,31 @@ function ReminderModal({ open, onClose }) {
       title="Rappel"
       subtitle="Les règles essentielles pour comprendre et utiliser la négation."
     >
-      <div className="grid gap-3 text-xs leading-relaxed md:grid-cols-2 md:text-sm xl:grid-cols-4">
+      <div className="grid gap-2.5 text-xs leading-relaxed md:grid-cols-2 xl:grid-cols-4">
         {REMINDERS.map((card) => (
-          <div key={card.title} className="rounded-2xl border border-slate-200 bg-slate-50 p-3.5 shadow-sm">
+          <div key={card.title} className="rounded-2xl border border-slate-200 bg-slate-50 p-2.5 shadow-sm">
             <p className="font-black text-slate-800">{card.title}</p>
-            <p className="mt-0.5 text-[11px] font-semibold text-cyan-700 md:text-xs">{card.note}</p>
-            <p className="mt-1.5 text-slate-600">{highlightNegation(card.example)}</p>
+            <p className="mt-0.5 text-[11px] font-semibold text-cyan-700">{card.note}</p>
+            <p className="mt-1 text-slate-600">{highlightNegation(card.example)}</p>
           </div>
         ))}
       </div>
 
-      <div className="mt-4 grid gap-3 text-sm md:text-[15px] lg:grid-cols-3">
-        <div className="rounded-2xl border border-cyan-100 bg-cyan-50 p-3.5">
+      <div className="mt-3 grid gap-2.5 text-sm md:grid-cols-3 md:text-[14px]">
+        <div className="rounded-2xl border border-cyan-100 bg-cyan-50 p-2.5">
           <p className="font-black text-slate-800">Au présent</p>
           <p className="mt-1 text-slate-700">
             Les deux parties de la négation se placent juste avant et après le verbe :
             <span className="font-semibold"> Je ne danse pas.</span>
           </p>
         </div>
-        <div className="rounded-2xl border border-emerald-100 bg-emerald-50 p-3.5">
+        <div className="rounded-2xl border border-emerald-100 bg-emerald-50 p-2.5">
           <p className="font-black text-slate-800">Au passé composé</p>
           <p className="mt-1 text-slate-700">
-            Avec <strong>pas</strong>, <strong>plus</strong>, <strong>rien</strong> et <strong>jamais</strong>, la négation
-            encadre l’auxiliaire : <span className="font-semibold">Il n’a rien mangé.</span>
+            Avec <strong>pas</strong>, <strong>plus</strong>, <strong>rien</strong> et <strong>jamais</strong>, la négation encadre l’auxiliaire : <span className="font-semibold">Il n’a rien mangé.</span>
           </p>
         </div>
-        <div className="rounded-2xl border border-violet-100 bg-violet-50 p-3.5">
+        <div className="rounded-2xl border border-violet-100 bg-violet-50 p-2.5">
           <p className="font-black text-slate-800">Attention à personne</p>
           <p className="mt-1 text-slate-700">
             <strong>Personne</strong> sujet : <span className="font-semibold">Personne n’est venu.</span>
@@ -379,27 +373,21 @@ function AnswersModal({ open, onClose, answers }) {
       title="Voir les réponses"
       subtitle="Consulte les réponses données et les bonnes réponses pour chaque question."
     >
-      <div className="mx-auto max-w-4xl space-y-2.5">
+      <div className="mx-auto max-w-3xl space-y-2">
         {QUESTIONS.map((question, index) => {
           const userAnswer = answers[question.id] ?? '—';
           const isCorrect = answers[question.id] === question.answer;
 
           return (
-            <div key={question.id} className="rounded-2xl border border-slate-200 bg-slate-50 p-3 shadow-sm">
+            <div key={question.id} className="rounded-2xl border border-slate-200 bg-slate-50 p-2.5 shadow-sm">
               <p className="text-center text-[11px] font-black uppercase tracking-[0.16em] text-cyan-700">Question {index + 1}</p>
-              <p className="mt-1 text-center text-sm md:text-[15px] font-black leading-snug text-slate-800">{question.prompt}</p>
-              <div className="mx-auto mt-3 grid max-w-3xl gap-2 md:grid-cols-2">
-                <div
-                  className={`rounded-xl border p-2.5 text-center ${
-                    isCorrect ? 'border-emerald-200 bg-emerald-50' : 'border-rose-200 bg-rose-50'
-                  }`}
-                >
+              <p className="mt-1 text-center text-sm font-black leading-snug text-slate-800">{question.prompt}</p>
+              <div className="mx-auto mt-2 grid max-w-2xl gap-2 md:grid-cols-2">
+                <div className={`rounded-xl border p-2 text-center ${isCorrect ? 'border-emerald-200 bg-emerald-50' : 'border-rose-200 bg-rose-50'}`}>
                   <p className="text-[10px] font-black uppercase tracking-wide text-slate-500">Ta réponse</p>
-                  <p className={`mt-1 text-sm font-semibold ${isCorrect ? 'text-emerald-800' : 'text-rose-800'}`}>
-                    {userAnswer}
-                  </p>
+                  <p className={`mt-1 text-sm font-semibold ${isCorrect ? 'text-emerald-800' : 'text-rose-800'}`}>{userAnswer}</p>
                 </div>
-                <div className="rounded-xl border border-cyan-200 bg-cyan-50 p-2.5 text-center">
+                <div className="rounded-xl border border-cyan-200 bg-cyan-50 p-2 text-center">
                   <p className="text-[10px] font-black uppercase tracking-wide text-slate-500">Bonne réponse</p>
                   <p className="mt-1 text-sm font-semibold text-cyan-900">{question.answer}</p>
                 </div>
@@ -414,57 +402,53 @@ function AnswersModal({ open, onClose, answers }) {
 
 function Home({ hasProgress, onStart, onResetProgress }) {
   return (
-    <div className="rounded-[26px] border border-white/15 bg-gradient-to-br from-slate-950 via-blue-950 to-sky-900 p-4 text-white shadow-xl md:p-5">
+    <div className="rounded-[24px] border border-white/15 bg-gradient-to-br from-slate-950 via-blue-950 to-sky-900 p-3 text-white shadow-xl md:p-4">
       <div className="flex items-center gap-2">
         <BookOpenText className="h-5 w-5 text-cyan-300" />
         <h3 className="text-lg font-black text-white md:text-xl">Fonctionnement</h3>
       </div>
-      <p className="mt-1 text-sm text-white/70">Les structures essentielles pour bien utiliser la négation.</p>
+      <p className="mt-1 text-xs text-white/70 md:text-sm">Les structures essentielles pour bien utiliser la négation.</p>
 
-      <div className="mt-4 grid gap-2.5 sm:grid-cols-2">
+      <div className="mt-3 grid gap-2 md:grid-cols-4">
         {REMINDERS.map((card) => (
-          <div key={card.title} className="rounded-2xl border border-white/10 bg-white/10 p-3 backdrop-blur-sm">
-            <p className="font-black text-white">{card.title}</p>
-            <p className="mt-0.5 text-[11px] font-semibold text-cyan-200 md:text-xs">{card.note}</p>
-            <p className="mt-1.5 text-sm text-white/80">{highlightNegation(card.example)}</p>
+          <div key={card.title} className="rounded-2xl border border-white/10 bg-white/10 p-2.5 backdrop-blur-sm">
+            <p className="text-sm font-black text-white md:text-base">{card.title}</p>
+            <p className="mt-0.5 text-[10px] font-semibold text-cyan-200 md:text-xs">{card.note}</p>
+            <p className="mt-1 text-[11px] leading-snug text-white/80 md:text-[13px]">{highlightNegation(card.example)}</p>
           </div>
         ))}
       </div>
 
-      <div className="mt-4 grid gap-2.5 text-sm md:text-[15px]">
-        <div className="rounded-2xl border border-cyan-400/15 bg-cyan-400/10 p-3">
+      <div className="mt-3 grid gap-2 md:grid-cols-3 text-[12px] md:text-[14px]">
+        <div className="rounded-2xl border border-cyan-400/15 bg-cyan-400/10 p-2.5">
           <p className="font-black text-white">Au présent</p>
-          <p className="mt-1 text-white/80">
+          <p className="mt-0.5 leading-snug text-white/80">
             Les deux parties de la négation se placent juste avant et après le verbe :
             <span className="font-semibold text-white"> Je ne danse pas.</span>
           </p>
         </div>
-        <div className="rounded-2xl border border-emerald-400/15 bg-emerald-400/10 p-3">
+        <div className="rounded-2xl border border-emerald-400/15 bg-emerald-400/10 p-2.5">
           <p className="font-black text-white">Au passé composé</p>
-          <p className="mt-1 text-white/80">
-            Avec <strong className="text-white">pas</strong>, <strong className="text-white">plus</strong>,{' '}
-            <strong className="text-white">rien</strong> et <strong className="text-white">jamais</strong>, la négation encadre
-            l’auxiliaire : <span className="font-semibold text-white">Il n’a rien mangé.</span>
+          <p className="mt-0.5 leading-snug text-white/80">
+            Avec <strong className="text-white">pas</strong>, <strong className="text-white">plus</strong>, <strong className="text-white">rien</strong> et <strong className="text-white">jamais</strong>, la négation encadre l’auxiliaire : <span className="font-semibold text-white">Il n’a rien mangé.</span>
           </p>
         </div>
-        <div className="rounded-2xl border border-violet-400/15 bg-violet-400/10 p-3">
+        <div className="rounded-2xl border border-violet-400/15 bg-violet-400/10 p-2.5">
           <p className="font-black text-white">Attention à personne</p>
-          <p className="mt-1 text-white/80">
-            <strong className="text-white">Personne</strong> sujet :{' '}
-            <span className="font-semibold text-white">Personne n’est venu.</span>
+          <p className="mt-0.5 leading-snug text-white/80">
+            <strong className="text-white">Personne</strong> sujet : <span className="font-semibold text-white">Personne n’est venu.</span>
           </p>
-          <p className="mt-1 text-white/80">
-            <strong className="text-white">Personne</strong> COD :{' '}
-            <span className="font-semibold text-white">Je ne connais personne.</span>
+          <p className="mt-0.5 leading-snug text-white/80">
+            <strong className="text-white">Personne</strong> COD : <span className="font-semibold text-white">Je ne connais personne.</span>
           </p>
         </div>
       </div>
 
-      <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+      <div className="mt-4 flex flex-wrap items-center justify-center gap-2.5">
         <button
           type="button"
           onClick={onStart}
-          className="inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-cyan-600 to-blue-600 px-5 py-3 text-sm font-black text-white shadow-lg transition hover:scale-[1.01] md:text-base"
+          className="inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-cyan-600 to-blue-600 px-4 py-2 text-sm font-black text-white shadow-lg transition hover:scale-[1.01] md:text-[15px]"
         >
           {hasProgress ? 'Reprendre' : 'S’entraîner'}
           <ArrowRight className="h-4 w-4" />
@@ -474,7 +458,7 @@ function Home({ hasProgress, onStart, onResetProgress }) {
           <button
             type="button"
             onClick={onResetProgress}
-            className="inline-flex items-center gap-2 rounded-2xl border border-white/15 bg-white/10 px-5 py-3 text-sm font-black text-white shadow-lg transition hover:bg-white/15 md:text-base backdrop-blur-sm"
+            className="inline-flex items-center gap-2 rounded-2xl border border-white/15 bg-white/10 px-4 py-2 text-sm font-black text-white shadow-lg transition hover:bg-white/15 md:text-[15px] backdrop-blur-sm"
           >
             <RotateCcw className="h-4 w-4" />
             Réinitialiser
@@ -485,27 +469,25 @@ function Home({ hasProgress, onStart, onResetProgress }) {
   );
 }
 
-function QuestionCard(props) {
-  const {
-    question,
-    currentIndex,
-    total,
-    selected,
-    feedback,
-    onSelect,
-    onNext,
-    onPrevious,
-    onGoHome,
-    onOpenReminder,
-  } = props;
-
+function QuestionCard({
+  question,
+  currentIndex,
+  total,
+  selected,
+  feedback,
+  onSelect,
+  onNext,
+  onPrevious,
+  onGoHome,
+  onOpenReminder,
+}) {
   return (
-    <div className="rounded-[26px] border border-white/15 bg-gradient-to-br from-slate-950 via-blue-950 to-sky-900 p-4 shadow-xl md:p-5">
-      <div className="flex flex-wrap items-center justify-between gap-3">
+    <div className="rounded-[24px] border border-white/15 bg-gradient-to-br from-slate-950 via-blue-950 to-sky-900 p-3.5 shadow-xl md:p-4">
+      <div className="flex flex-wrap items-center justify-between gap-2">
         <button
           type="button"
           onClick={onGoHome}
-          className="inline-flex items-center gap-1.5 rounded-xl border border-white/15 bg-white/10 px-3 py-1.5 text-xs font-black text-white transition hover:bg-white/15 md:text-sm backdrop-blur-sm"
+          className="inline-flex items-center gap-1.5 rounded-xl border border-white/15 bg-white/10 px-3.5 py-2 text-xs font-black text-white transition hover:bg-white/15 backdrop-blur-sm"
         >
           Accueil
         </button>
@@ -513,7 +495,7 @@ function QuestionCard(props) {
         <button
           type="button"
           onClick={onOpenReminder}
-          className="inline-flex items-center gap-1.5 rounded-xl border border-white/15 bg-white/10 px-3 py-1.5 text-xs font-black text-white transition hover:bg-white/15 md:text-sm backdrop-blur-sm"
+          className="inline-flex items-center gap-1.5 rounded-xl border border-white/15 bg-white/10 px-3.5 py-2 text-xs font-black text-white transition hover:bg-white/15 backdrop-blur-sm"
         >
           <BookOpenText className="h-4 w-4" />
           Rappel
@@ -528,16 +510,14 @@ function QuestionCard(props) {
           const showCorrect = Boolean(feedback) && option === question.answer;
           const showWrong = Boolean(feedback) && isSelected && option !== question.answer;
 
-          let optionClassName =
-            'border-slate-200 bg-white text-slate-800 hover:-translate-y-0.5 hover:scale-[1.01] hover:border-cyan-300 hover:bg-slate-50';
+          let optionClassName = 'border-slate-200 bg-white text-slate-800 hover:-translate-y-0.5 hover:scale-[1.01] hover:border-cyan-300 hover:bg-slate-50';
 
           if (showCorrect) {
             optionClassName = 'border-emerald-300 bg-gradient-to-r from-emerald-500 to-green-600 text-white shadow-md';
           } else if (showWrong) {
             optionClassName = 'border-rose-300 bg-gradient-to-r from-rose-500 to-red-600 text-white shadow-md';
           } else if (isSelected) {
-            optionClassName =
-              'border-cyan-500 bg-white text-slate-800 ring-2 ring-cyan-400/40 hover:-translate-y-0.5 hover:scale-[1.01]';
+            optionClassName = 'border-cyan-500 bg-white text-slate-800 ring-2 ring-cyan-400/40 hover:-translate-y-0.5 hover:scale-[1.01]';
           }
 
           return (
@@ -546,12 +526,12 @@ function QuestionCard(props) {
               type="button"
               onClick={() => onSelect(option)}
               disabled={Boolean(feedback)}
-              className={`mx-auto w-full max-w-3xl transform rounded-2xl border px-3 py-2.5 text-sm font-semibold transition-all duration-200 md:text-base ${optionClassName}`}
+              className={`mx-auto w-full max-w-2xl transform rounded-2xl border px-3 py-2.5 text-sm font-semibold transition-all duration-200 md:text-base ${optionClassName}`}
             >
               <div className="relative flex items-center justify-center gap-3">
                 <span className="block text-center">{highlightNegation(option)}</span>
-                {showCorrect ? <CheckCircle2 className="absolute right-0 h-4 w-4 shrink-0 md:h-5 md:w-5" /> : null}
-                {showWrong ? <XCircle className="absolute right-0 h-4 w-4 shrink-0 md:h-5 md:w-5" /> : null}
+                {showCorrect ? <CheckCircle2 className="absolute right-0 h-4 w-4 shrink-0" /> : null}
+                {showWrong ? <XCircle className="absolute right-0 h-4 w-4 shrink-0" /> : null}
               </div>
             </button>
           );
@@ -560,18 +540,14 @@ function QuestionCard(props) {
 
       {feedback ? (
         <div
-          className={`mt-4 rounded-2xl border p-3.5 ${
-            feedback.correct
-              ? 'border-emerald-300 bg-gradient-to-r from-emerald-500 to-green-600'
-              : 'border-rose-300 bg-gradient-to-r from-rose-500 to-red-600'
-          }`}
+          className={`mt-4 rounded-2xl border p-3.5 ${feedback.correct ? 'border-emerald-300 bg-gradient-to-r from-emerald-500 to-green-600' : 'border-rose-300 bg-gradient-to-r from-rose-500 to-red-600'}`}
         >
-          <p className="flex items-center gap-2 text-sm font-black text-white md:text-base">
+          <p className="flex items-center gap-2 text-sm font-black text-white">
             {feedback.correct ? <CheckCircle2 className="h-4 w-4" /> : <XCircle className="h-4 w-4" />}
             {feedback.correct ? 'Bravo !' : 'Attention !'}
           </p>
-          <p className="mt-1.5 text-sm text-white/95">{highlightNegation(feedback.message)}</p>
-          <div className="mt-3 flex flex-wrap items-center gap-2">
+          <p className="mt-1.5 text-sm text-white/95 md:text-base">{highlightNegation(feedback.message)}</p>
+          <div className="mt-3 flex flex-wrap items-center gap-2.5">
             <button
               type="button"
               onClick={onPrevious}
@@ -598,59 +574,53 @@ function ResultScreen({ score, total, onGoHome, onOpenAnswers }) {
   const percent = Math.round((score / total) * 100);
 
   const message = useMemo(() => {
-    if (percent === 100) {
-      return 'Excellent ! Tu maîtrises très bien la négation.';
-    }
-    if (percent >= 80) {
-      return 'Très bon travail ! Tu as bien compris les structures principales.';
-    }
-    if (percent >= 60) {
-      return 'Bon effort ! Continue à t’entraîner pour fixer les automatismes.';
-    }
+    if (percent === 100) return 'Excellent ! Tu maîtrises très bien la négation.';
+    if (percent >= 80) return 'Très bon travail ! Tu as bien compris les structures principales.';
+    if (percent >= 60) return 'Bon effort ! Continue à t’entraîner pour fixer les automatismes.';
     return 'Courage ! Refaire l’activité va t’aider à mieux mémoriser les règles.';
   }, [percent]);
 
   return (
-    <div className="rounded-[26px] border border-white/70 bg-white/94 p-5 text-center shadow-xl md:p-6">
-      <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 text-white shadow-lg">
-        <Trophy className="h-7 w-7" />
+    <div className="rounded-[22px] border border-white/70 bg-white/94 p-3 text-center shadow-xl md:p-3.5">
+      <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 text-white shadow-lg">
+        <Trophy className="h-6 w-6" />
       </div>
-      <h2 className="mt-3 text-2xl font-black text-slate-800 md:text-3xl">Résultat</h2>
-      <p className="mt-2 text-sm text-slate-600 md:text-base">{message}</p>
+      <h2 className="mt-2 text-2xl font-black text-slate-800">Résultat</h2>
+      <p className="mt-1.5 text-sm text-slate-600">{message}</p>
 
-      <div className="mx-auto mt-5 max-w-md">
-        <div className="h-2.5 overflow-hidden rounded-full bg-slate-200">
+      <div className="mx-auto mt-3 max-w-md">
+        <div className="h-2 overflow-hidden rounded-full bg-slate-200">
           <div className="h-full rounded-full bg-gradient-to-r from-cyan-500 to-blue-500" style={{ width: `${percent}%` }} />
         </div>
       </div>
 
-      <div className="mx-auto mt-5 grid max-w-2xl gap-2.5 sm:grid-cols-3">
-        <div className="rounded-2xl border border-cyan-100 bg-cyan-50 p-3">
+      <div className="mx-auto mt-3 grid max-w-xl gap-2 sm:grid-cols-3">
+        <div className="rounded-2xl border border-cyan-100 bg-cyan-50 p-2.5">
           <p className="text-[10px] font-black uppercase tracking-wide text-cyan-700">Bonnes réponses</p>
-          <p className="mt-1 text-xl font-black text-slate-800">{score}/{total}</p>
+          <p className="mt-1 text-lg font-black text-slate-800">{score}/{total}</p>
         </div>
-        <div className="rounded-2xl border border-emerald-100 bg-emerald-50 p-3">
+        <div className="rounded-2xl border border-emerald-100 bg-emerald-50 p-2.5">
           <p className="text-[10px] font-black uppercase tracking-wide text-emerald-700">Pourcentage</p>
-          <p className="mt-1 text-xl font-black text-slate-800">{percent}%</p>
+          <p className="mt-1 text-lg font-black text-slate-800">{percent}%</p>
         </div>
-        <div className="rounded-2xl border border-violet-100 bg-violet-50 p-3">
+        <div className="rounded-2xl border border-violet-100 bg-violet-50 p-2.5">
           <p className="text-[10px] font-black uppercase tracking-wide text-violet-700">XP gagné</p>
-          <p className="mt-1 text-xl font-black text-slate-800">{score * 10}</p>
+          <p className="mt-1 text-lg font-black text-slate-800">{score * 10}</p>
         </div>
       </div>
 
-      <div className="mt-5 flex flex-wrap items-center justify-center gap-3">
+      <div className="mt-3 flex flex-wrap items-center justify-center gap-2">
         <button
           type="button"
           onClick={onGoHome}
-          className="inline-flex items-center gap-2 rounded-2xl bg-slate-900 px-4 py-2.5 text-sm font-black text-white transition hover:bg-slate-800 md:text-base"
+          className="inline-flex items-center gap-2 rounded-2xl bg-slate-900 px-4 py-2 text-sm font-black text-white transition hover:bg-slate-800 md:text-[15px]"
         >
           Accueil
         </button>
         <button
           type="button"
           onClick={onOpenAnswers}
-          className="inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-cyan-600 to-blue-600 px-4 py-2.5 text-sm font-black text-white transition hover:scale-[1.01] md:text-base"
+          className="inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-cyan-600 to-blue-600 px-4 py-2 text-sm font-black text-white transition hover:scale-[1.01] md:text-[15px]"
         >
           Voir les réponses
         </button>
@@ -735,13 +705,10 @@ export default function NegationApp() {
   };
 
   const handleSelect = (option) => {
-    setAnswers((prev) => {
-      return {
-        ...prev,
-        [currentQuestion.id]: option,
-      };
-    });
-
+    setAnswers((prev) => ({
+      ...prev,
+      [currentQuestion.id]: option,
+    }));
     setFeedback(buildFeedback(currentQuestion, option));
   };
 
@@ -761,25 +728,24 @@ export default function NegationApp() {
     if (currentIndex === 0) {
       return;
     }
-
     openQuestionAt(currentIndex - 1);
   };
 
   return (
     <div
-      className="min-h-screen bg-cover bg-center bg-fixed"
+      className="relative h-screen overflow-hidden bg-cover bg-center bg-fixed"
       style={{
         backgroundImage:
           "linear-gradient(rgba(7, 18, 38, 0.42), rgba(7, 18, 38, 0.42)), url('https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1600&q=80')",
       }}
     >
-      <div className="mx-auto max-w-6xl px-3 py-3 md:px-4 md:py-5">
+      <div className="mx-auto grid h-full w-full max-w-5xl grid-rows-[auto_1fr_auto] px-3 py-2 md:px-4 md:py-3">
         <Header started={started} score={score} currentIndex={currentIndex} total={QUESTIONS.length} />
 
         <ReminderModal open={showReminder} onClose={() => setShowReminder(false)} />
         <AnswersModal open={showAnswers} onClose={() => setShowAnswers(false)} answers={answers} />
 
-        <div className="mt-3.5">
+        <div className="mt-2.5 min-h-0 overflow-auto">
           {!started && !finished ? (
             <Home hasProgress={hasProgress} onStart={startGame} onResetProgress={resetGame} />
           ) : finished ? (
@@ -804,8 +770,7 @@ export default function NegationApp() {
             />
           )}
         </div>
-
-        <div className="mt-6 pb-2 text-center text-xs font-medium tracking-wide text-white/70 md:text-sm">
+        <div className="mt-2 text-center text-[10px] font-medium tracking-wide text-white/75 md:text-xs">
           © Felipe LV - Produit Grammaire FLE
         </div>
       </div>
